@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import SummaryCard from "../../components/reusable/card/SummaryCard";
 import QuickAction from "../../components/reusable/card/QuickAction";
 
 const STORAGE_KEY = "SPENDLY!";
 
 const Dashboard = () => {
+  const navigate = useNavigate();
   const [transactions, setTransactions] = useState(() => {
     const saved = localStorage.getItem(STORAGE_KEY);
     return saved ? JSON.parse(saved) : [];
@@ -30,8 +32,17 @@ const Dashboard = () => {
 
   return (
     <div className="min-h-screen bg-[#F8F8FC] p-6">
-      <h1 className="text-2xl font-bold">Good Morning, Airstar</h1>
-      <p className="text-gray-500 mt-1">Here's your financial overview</p>
+
+      <div className="flex justify-between items-center">
+        <div>
+          <h1 className="text-2xl font-bold">Good Morning, Airstar</h1>
+          <p className="text-gray-500 mt-1">Here's your financial overview</p>
+        </div>
+
+        <button onClick={() => navigate("/signin")} className="text-sm text-[#502D55] font-medium">
+          Sign out
+        </button>
+      </div>
 
       <div className="mt-6 rounded-3xl bg-[#502D55] p-6 text-white">
         <p className="text-sm text-white/70">Total Balance</p>
@@ -77,6 +88,7 @@ const Dashboard = () => {
           />
         </div>
       </div>
+
     </div>
   );
 };
