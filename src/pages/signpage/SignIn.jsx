@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Button from "../../components/reusable/button/Button";
-import SocialLogin from "../../components/reusable/Icons/SocialLogin";
+import Button from "../../components/ui/button/Button";
+import SocialLogin from "../../components/ui/Icons/SocialLogin";
 
 const SignIn = () => {
   const navigate = useNavigate();
