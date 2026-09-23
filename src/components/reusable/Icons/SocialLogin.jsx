@@ -7,7 +7,7 @@ function SocialLogin() {
       <div className="flex items-center gap-3">
         <div className="h-px flex-1 bg-gray-300"></div>
 
-        <p className="text-sm text-gray-500">Sign in with</p>
+        <p className="text-[11px] text-gray-500">Sign in with</p>
 
         <div className="h-px flex-1 bg-gray-300"></div>
       </div>
