@@ -23,7 +23,7 @@ const SignIn = () => {
         <div className="relative max-w-md w-full rounded-2xl overflow-hidden">
           <img
             src="/signinimage.webp"
-            alt="Sign in illustration"
+            alt="Signinillustration"
             className="w-full h-auto object-contain"
           />
           <div className="absolute inset-0 bg-linear-to-br from-[#502D55]/40 to-[#935073]/40" />
@@ -71,7 +71,14 @@ const SignIn = () => {
                   added pl-9 (room for icon) and focus:ring classes */}
               <div className="relative mt-1">
                 <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[#B0A190]">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
                     <rect x="2" y="4" width="20" height="16" rx="2" />
                     <path d="m22 6-10 7L2 6" />
                   </svg>
@@ -95,7 +102,14 @@ const SignIn = () => {
                   showPassword state), focus:ring added */}
               <div className="relative mt-1">
                 <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[#B0A190]">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
                     <rect x="3" y="11" width="18" height="11" rx="2" />
                     <path d="M7 11V7a5 5 0 0 1 10 0v4" />
                   </svg>
@@ -119,7 +133,8 @@ const SignIn = () => {
 
             <div className="flex justify-between items-center text-xs text-[#6B5A47]">
               <label className="flex items-center gap-1.5">
-                <input type="checkbox" className="accent-[#502D55]" /> Remember me
+                <input type="checkbox" className="accent-[#502D55]" /> Remember
+                me
               </label>
               <span className="text-[#8d5d76] font-medium hover:underline cursor-pointer">
                 Forgot password?

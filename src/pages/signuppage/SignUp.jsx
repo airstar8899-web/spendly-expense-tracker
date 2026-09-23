@@ -70,7 +70,14 @@ const SignUp = () => {
               <label className="text-xs text-[#6B5A47]">Full Name</label>
               <div className="relative mt-1">
                 <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[#B0A190]">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
                     <circle cx="12" cy="8" r="4" />
                     <path d="M4 21v-1a7 7 0 0 1 14 0v1" />
                   </svg>
@@ -88,7 +95,14 @@ const SignUp = () => {
               <label className="text-xs text-[#6B5A47]">Email</label>
               <div className="relative mt-1">
                 <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[#B0A190]">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
                     <rect x="2" y="4" width="20" height="16" rx="2" />
                     <path d="m22 6-10 7L2 6" />
                   </svg>
@@ -107,7 +121,14 @@ const SignUp = () => {
               <label className="text-xs text-[#6B5A47]">Password</label>
               <div className="relative mt-1">
                 <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[#B0A190]">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
                     <rect x="3" y="11" width="18" height="11" rx="2" />
                     <path d="M7 11V7a5 5 0 0 1 10 0v4" />
                   </svg>
@@ -160,7 +181,7 @@ const SignUp = () => {
           </form>
 
           {/* CHANGE 3: "Already have an account?" restored to the bottom of the card,
-              like your original — removed from the header row */}
+              like the original — removed from the header row */}
           <p className="text-center text-sm text-[#6B5A47] mt-6">
             Already have an account?{" "}
             <button
