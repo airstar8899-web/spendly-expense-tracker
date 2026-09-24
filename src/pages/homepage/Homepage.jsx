@@ -16,7 +16,7 @@ const Homepage = () => {
           </span>
           <div>
             <h1 className="font-bold text-lg text-[#502D55] tracking-tight">Finora</h1>
-            <p className="text-xs text-[#6B3F63]">Welcome back, Temitope</p>
+            <p className="text-xs text-[#6B3F63]">Welcome back, Temitayo</p>
           </div>
         </div>
 
