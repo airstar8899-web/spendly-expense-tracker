@@ -9,9 +9,24 @@ import {
 } from "lucide-react";
 
 const navItems = [
-  { key: "dashboard", label: "Dashboard", path: "/dashboard", Icon: LayoutGrid },
-  { key: "history", label: "Transaction History", path: "/transactions", Icon: ArrowLeftRight },
-  { key: "recurring", label: "Recurring Items", path: "/recurring", Icon: Repeat },
+  {
+    key: "dashboard",
+    label: "Dashboard",
+    path: "/dashboard",
+    Icon: LayoutGrid,
+  },
+  {
+    key: "history",
+    label: "Transaction History",
+    path: "/transactions",
+    Icon: ArrowLeftRight,
+  },
+  {
+    key: "recurring",
+    label: "Recurring Items",
+    path: "/recurring",
+    Icon: Repeat,
+  },
   { key: "balance", label: "Balance", path: "/balance", Icon: Wallet },
   { key: "report", label: "Report", path: "/report", Icon: BarChart3 },
 ];
@@ -53,9 +68,9 @@ const Sidebar = () => {
         })}
       </nav>
 
-    <div className="flex-1" />
+      <div className="flex-1" />
 
-    {/* Log out */}
+      {/* Log out */}
       <div className="px-2 md:px-3 mt-8">
         <button
           onClick={() => navigate("/signin")}

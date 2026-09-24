@@ -1,38 +1,49 @@
-import { useNavigate } from 'react-router-dom';
-import { Wallet, ArrowRight, ShieldCheck, PieChart, TrendingDown, CheckCircle2 } from 'lucide-react';
-import Button from '../../components/reusable/button/Button';
+import { useNavigate } from "react-router-dom";
+import {
+  ArrowRight,
+  ShieldCheck,
+  PieChart,
+  TrendingDown,
+  CheckCircle2,
+} from "lucide-react";
 
-const Homepage = () => {
+const Welcome = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-[#F8F4E9] text-[#502D55] font-sans selection:bg-[#F6DBC0] selection:text-[#502D55]">
+    <div className="min-h-screen bg-[#efece5] text-[#502D55] font-sans selection:bg-[#F6DBC0] selection:text-[#502D55]">
       {/* Navbar */}
       <header className="max-w-7xl mx-auto px-6 py-6 flex items-center justify-between">
         <div className="px-4 md:px-6 mb-8 flex items-center justify-center md:justify-start gap-2">
-        <div className="w-8 h-8 rounded-lg bg-[#502D55] flex items-center justify-center text-white text-sm font-bold">
-          S
+          <div className="w-8 h-8 rounded-lg bg-[#502D55] flex items-center justify-center text-white text-sm font-bold">
+            S
+          </div>
+          <span className="hidden md:inline text-lg font-bold text-[#502D55]">
+            Spendly
+          </span>
         </div>
-        <span className="hidden md:inline text-lg font-bold text-[#502D55]">
-          Spendly
-        </span>
-      </div>
 
         <nav className="hidden md:flex items-center gap-8 text-sm text-[#6B3F63] font-medium">
-          <a href="#features" className="hover:text-[#502D55] transition">Features</a>
-          <a href="#analytics" className="hover:text-[#502D55] transition">Analytics</a>
-          <a href="#security" className="hover:text-[#502D55] transition">Security</a>
+          <a href="#features" className="hover:text-[#502D55] transition">
+            Features
+          </a>
+          <a href="#analytics" className="hover:text-[#502D55] transition">
+            Analytics
+          </a>
+          <a href="#security" className="hover:text-[#502D55] transition">
+            Security
+          </a>
         </nav>
 
         <div className="flex items-center gap-3">
-          <button 
-            onClick={() => navigate('/signin')}
+          <button
+            onClick={() => navigate("/signin")}
             className="text-sm font-medium text-[#502D55] hover:text-[#6B3F63] px-4 py-2 transition"
           >
             Sign in
           </button>
-          <button 
-            onClick={() => navigate('/signup')}
+          <button
+            onClick={() => navigate("/signup")}
             className="text-sm font-semibold bg-[#502D55] text-[#F8F4E9] px-5 py-2.5 rounded-full hover:bg-[#6B3F63] transition shadow-sm"
           >
             Get Started
@@ -42,7 +53,6 @@ const Homepage = () => {
 
       {/* Hero Section */}
       <section className="max-w-7xl mx-auto px-6 pt-12 pb-24 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-        
         {/* Left Column: Typography & CTAs */}
         <div className="lg:col-span-7 space-y-6">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-[#F6DBC0]/60 text-[#502D55] rounded-full text-xs font-bold tracking-wide border border-[#F6DBC0]">
@@ -55,19 +65,21 @@ const Homepage = () => {
           </h1>
 
           <p className="text-lg text-[#6B3F63] max-w-xl leading-relaxed">
-            Fenora helps you effortlessly log expenses, monitor monthly cash flow, and keep your financial goals in sharp focus through a calm, distraction-free interface.
+            Spendly helps you effortlessly log expenses, monitor monthly cash
+            flow, and keep your financial goals in sharp focus through a calm,
+            distraction-free interface.
           </p>
 
           <div className="flex flex-wrap items-center gap-4 pt-2">
-            <button 
-              onClick={() => navigate('/signup')}
+            <button
+              onClick={() => navigate("/signup")}
               className="flex items-center gap-2 bg-[#502D55] text-[#F8F4E9] px-7 py-4 rounded-full font-semibold hover:bg-[#6B3F63] transition shadow-lg group"
             >
               Create free account
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </button>
-            <button 
-              onClick={() => navigate('/signin')}
+            <button
+              onClick={() => navigate("/signin")}
               className="flex items-center gap-2 bg-white border border-[#F6DBC0] text-[#502D55] px-7 py-4 rounded-full font-semibold hover:bg-[#F6DBC0]/20 transition shadow-sm"
             >
               Sign into dashboard
@@ -76,30 +88,34 @@ const Homepage = () => {
 
           <div className="flex items-center gap-6 pt-4 text-xs text-[#6B3F63] font-medium">
             <span className="flex items-center gap-1.5">
-              <CheckCircle2 className="w-4 h-4 text-[#935073]" /> Completely private
+              <CheckCircle2 className="w-4 h-4 text-[#935073]" /> Completely
+              private
             </span>
             <span className="flex items-center gap-1.5">
-              <CheckCircle2 className="w-4 h-4 text-[#935073]" /> Zero setup friction
+              <CheckCircle2 className="w-4 h-4 text-[#935073]" /> Zero setup
+              friction
             </span>
           </div>
         </div>
 
         {/* Right Column: Sleek Expense Dashboard Mockup Card */}
         <div className="lg:col-span-5 relative">
-          
           {/* Decorative Background Glow matching your color palette */}
-          <div className="absolute -inset-1.5 bg-gradient-to-tr from-[#502D55] via-[#935073] to-[#F6DBC0] rounded-[32px] blur-xl opacity-30"></div>
+          <div className="absolute -inset-1.5 bg-linear-to-tr from-[#502D55] via-[#935073] to-[#F6DBC0] rounded-4xl blur-xl opacity-30"></div>
 
           <div className="bg-[#502D55] text-[#F8F4E9] p-7 rounded-3xl shadow-2xl border border-[#6B3F63] space-y-6 relative">
-            
             {/* Top Balance Card Widget */}
             <div className="space-y-2 bg-[#6B3F63]/50 p-4 rounded-2xl border border-[#935073]/40">
               <div className="flex justify-between items-center text-xs text-[#F6DBC0] font-medium tracking-wider uppercase">
                 <span>September Outflow</span>
-                <span className="bg-[#935073] text-[#F8F4E9] px-2 py-0.5 rounded-full font-bold text-[10px]">Active</span>
+                <span className="bg-[#935073] text-[#F8F4E9] px-2 py-0.5 rounded-full font-bold text-[10px]">
+                  Active
+                </span>
               </div>
               <div className="flex items-baseline gap-2">
-                <span className="text-3xl font-extrabold text-[#F8F4E9]">#1,245.80</span>
+                <span className="text-3xl font-extrabold text-[#F8F4E9]">
+                  #1,245.80
+                </span>
                 <span className="text-xs text-[#F6DBC0]">/ #2,000 budget</span>
               </div>
               {/* Progress bar */}
@@ -114,7 +130,7 @@ const Homepage = () => {
                 <span>Recent Expenses</span>
                 <span className="text-[11px] text-[#F8F4E9]/70">View all</span>
               </div>
-              
+
               <div className="space-y-2.5 text-sm">
                 <div className="flex justify-between items-center py-2.5 px-3.5 bg-[#6B3F63]/40 rounded-xl border border-[#935073]/20">
                   <div className="flex items-center gap-3">
@@ -122,11 +138,17 @@ const Homepage = () => {
                       <TrendingDown className="w-4 h-4" />
                     </div>
                     <div>
-                      <p className="font-medium text-[#F8F4E9]">Grocery Store</p>
-                      <p className="text-[11px] text-[#F6DBC0]">Today, 2:45 PM</p>
+                      <p className="font-medium text-[#F8F4E9]">
+                        Grocery Store
+                      </p>
+                      <p className="text-[11px] text-[#F6DBC0]">
+                        Today, 2:45 PM
+                      </p>
                     </div>
                   </div>
-                  <span className="font-bold text-[#F6DBC0] text-sm">-#64.20</span>
+                  <span className="font-bold text-[#F6DBC0] text-sm">
+                    -#64.20
+                  </span>
                 </div>
 
                 <div className="flex justify-between items-center py-2.5 px-3.5 bg-[#6B3F63]/40 rounded-xl border border-[#935073]/20">
@@ -135,11 +157,15 @@ const Homepage = () => {
                       <TrendingDown className="w-4 h-4" />
                     </div>
                     <div>
-                      <p className="font-medium text-[#F8F4E9]">Cloud Hosting</p>
+                      <p className="font-medium text-[#F8F4E9]">
+                        Cloud Hosting
+                      </p>
                       <p className="text-[11px] text-[#F6DBC0]">Yesterday</p>
                     </div>
                   </div>
-                  <span className="font-bold text-[#F6DBC0] text-sm">-#19.99</span>
+                  <span className="font-bold text-[#F6DBC0] text-sm">
+                    -#19.99
+                  </span>
                 </div>
               </div>
             </div>
@@ -154,13 +180,11 @@ const Homepage = () => {
                 <p className="text-[#6B3F63]">Your records stay private</p>
               </div>
             </div>
-
           </div>
         </div>
-
       </section>
     </div>
   );
 };
 
-export default Homepage;
+export default Welcome;
