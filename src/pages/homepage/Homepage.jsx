@@ -15,7 +15,7 @@ const Homepage = () => {
             <Wallet className="w-5 h-5" />
           </span>
           <div>
-            <h1 className="font-bold text-lg text-[#502D55] tracking-tight">Finora</h1>
+            <h1 className="font-bold text-lg text-[#502D55] tracking-tight">Spendly</h1>
             <p className="text-xs text-[#6B3F63]">Welcome back, Temitayo</p>
           </div>
         </div>

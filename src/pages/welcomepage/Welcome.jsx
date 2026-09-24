@@ -9,12 +9,14 @@ const Homepage = () => {
     <div className="min-h-screen bg-[#F8F4E9] text-[#502D55] font-sans selection:bg-[#F6DBC0] selection:text-[#502D55]">
       {/* Navbar */}
       <header className="max-w-7xl mx-auto px-6 py-6 flex items-center justify-between">
-        <div className="flex items-center gap-2 font-bold text-xl tracking-tight text-[#502D55]">
-          <span className="p-2 bg-[#502D55] text-[#F8F4E9] rounded-xl shadow-sm">
-            <Wallet className="w-5 h-5" />
-          </span>
-         Fenora
+        <div className="px-4 md:px-6 mb-8 flex items-center justify-center md:justify-start gap-2">
+        <div className="w-8 h-8 rounded-lg bg-[#502D55] flex items-center justify-center text-white text-sm font-bold">
+          S
         </div>
+        <span className="hidden md:inline text-lg font-bold text-[#502D55]">
+          Spendly
+        </span>
+      </div>
 
         <nav className="hidden md:flex items-center gap-8 text-sm text-[#6B3F63] font-medium">
           <a href="#features" className="hover:text-[#502D55] transition">Features</a>
