@@ -11,9 +11,12 @@ const Homepage = () => {
       {/* Top Navigation Bar */}
       <header className="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between border-b border-[#F6DBC0]/50">
         <div className="flex items-center gap-3">
-          <span className="p-2.5 bg-[#502D55] text-[#F8F4E9] rounded-2xl shadow-sm">
-            <Wallet className="w-5 h-5" />
-          </span>
+          
+        <div className="w-8 h-8 rounded-lg bg-[#502D55] flex items-center justify-center text-white text-sm font-bold">
+          S
+        </div>
+        
+      
           <div>
             <h1 className="font-bold text-lg text-[#502D55] tracking-tight">Spendly</h1>
             <p className="text-xs text-[#6B3F63]">Welcome back, Temitayo</p>
