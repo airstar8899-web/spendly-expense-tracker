@@ -98,8 +98,8 @@ const Homepage = () => {
                 <span className="bg-[#935073] text-[#F8F4E9] px-2 py-0.5 rounded-full font-bold text-[10px]">Active</span>
               </div>
               <div className="flex items-baseline gap-2">
-                <span className="text-3xl font-extrabold text-[#F8F4E9]">$1,245.80</span>
-                <span className="text-xs text-[#F6DBC0]">/ $2,000 budget</span>
+                <span className="text-3xl font-extrabold text-[#F8F4E9]">#1,245.80</span>
+                <span className="text-xs text-[#F6DBC0]">/ #2,000 budget</span>
               </div>
               {/* Progress bar */}
               <div className="w-full bg-[#502D55] h-2 rounded-full overflow-hidden mt-2">
@@ -125,7 +125,7 @@ const Homepage = () => {
                       <p className="text-[11px] text-[#F6DBC0]">Today, 2:45 PM</p>
                     </div>
                   </div>
-                  <span className="font-bold text-[#F6DBC0] text-sm">-$64.20</span>
+                  <span className="font-bold text-[#F6DBC0] text-sm">-#64.20</span>
                 </div>
 
                 <div className="flex justify-between items-center py-2.5 px-3.5 bg-[#6B3F63]/40 rounded-xl border border-[#935073]/20">
@@ -138,7 +138,7 @@ const Homepage = () => {
                       <p className="text-[11px] text-[#F6DBC0]">Yesterday</p>
                     </div>
                   </div>
-                  <span className="font-bold text-[#F6DBC0] text-sm">-$19.99</span>
+                  <span className="font-bold text-[#F6DBC0] text-sm">-#19.99</span>
                 </div>
               </div>
             </div>
