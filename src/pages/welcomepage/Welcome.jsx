@@ -54,7 +54,7 @@ const Homepage = () => {
           </h1>
 
           <p className="text-lg text-[#6B3F63] max-w-xl leading-relaxed">
-            Spendly helps you effortlessly log expenses, monitor monthly cash flow, and keep your financial goals in sharp focus through a calm, distraction-free interface.
+            Fenora helps you effortlessly log expenses, monitor monthly cash flow, and keep your financial goals in sharp focus through a calm, distraction-free interface.
           </p>
 
           <div className="flex flex-wrap items-center gap-4 pt-2">
