@@ -1,13 +1,11 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import SummaryCard from "../../components/reusable/card/SummaryCard";
 import QuickAction from "../../components/reusable/card/QuickAction";
 
 const STORAGE_KEY = "SPENDLY!";
 
 const Dashboard = () => {
-  const navigate = useNavigate();
-  const [transactions, setTransactions] = useState(() => {
+  const [transactions] = useState(() => {
     const saved = localStorage.getItem(STORAGE_KEY);
     return saved ? JSON.parse(saved) : [];
   });
@@ -16,9 +14,13 @@ const Dashboard = () => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(transactions));
   }, [transactions]);
 
-  function addTransaction(tx) {
-    setTransactions((prev) => [...prev, tx]);
-  }
+  // function addTransaction(tx) {
+  //   setTransactions((prev) => [...prev, tx]);
+  // }
+
+  const total = transactions
+    .filter((t) => t.type === "total")
+    .reduce((total, t) => total + t.amount, 0);
 
   const income = transactions
     .filter((t) => t.type === "income")
@@ -31,26 +33,13 @@ const Dashboard = () => {
   const balance = income - expenses;
 
   return (
-    <div className="min-h-screen bg-[#F8F8FC] p-6">
-
-      <div className="flex justify-between items-center">
-        <div>
-          <h1 className="text-2xl font-bold">Good Morning, Airstar</h1>
-          <p className="text-gray-500 mt-1">Here's your financial overview</p>
-        </div>
-
-        <button onClick={() => navigate("/signin")} className="text-sm text-[#502D55] font-medium">
-          Sign out
-        </button>
-      </div>
-
-      <div className="mt-6 rounded-3xl bg-[#502D55] p-6 text-white">
-        <p className="text-sm text-white/70">Total Balance</p>
-        <h2 className="mt-2 text-3xl font-bold">₦{balance.toLocaleString()}</h2>
-        <p className="mt-4 text-sm text-white/70">Available balance</p>
-      </div>
-
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
+    <>
+      <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
+        <SummaryCard
+          title="Total Transaction"
+          amount={`₦${total.toLocaleString()}`}
+          className="bg-white shadow-sm"
+        />
         <SummaryCard
           title="Income"
           amount={`₦${income.toLocaleString()}`}
@@ -62,7 +51,7 @@ const Dashboard = () => {
           className="bg-white shadow-sm"
         />
         <SummaryCard
-          title="Savings"
+          title="Balance"
           amount={`₦${balance.toLocaleString()}`}
           className="bg-white shadow-sm"
         />
@@ -88,8 +77,7 @@ const Dashboard = () => {
           />
         </div>
       </div>
-
-    </div>
+    </>
   );
 };
 
