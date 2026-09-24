@@ -1,4 +1,3 @@
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Wallet, ArrowRight, ShieldCheck, PieChart, TrendingDown, CheckCircle2 } from 'lucide-react';
 import Button from '../../components/reusable/button/Button';
@@ -14,7 +13,7 @@ const Homepage = () => {
           <span className="p-2 bg-[#502D55] text-[#F8F4E9] rounded-xl shadow-sm">
             <Wallet className="w-5 h-5" />
           </span>
-          Fenora
+         Fenora
         </div>
 
         <nav className="hidden md:flex items-center gap-8 text-sm text-[#6B3F63] font-medium">
