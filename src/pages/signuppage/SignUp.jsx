@@ -53,7 +53,7 @@ const SignUp = () => {
           onClick={() => navigate("/")}
           className="hidden md:block absolute bottom-6 left-6 md:left-16 text-[#6B5A47] text-sm text-left"
         >
-          &lt; Back To Home
+          Back To Home
         </button>
 
         {/* Card: centered, as you set it up */}
