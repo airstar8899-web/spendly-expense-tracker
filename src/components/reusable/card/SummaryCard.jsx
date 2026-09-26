@@ -1,4 +1,11 @@
-const SummaryCard = ({ title, amount, subtitle, icon, trend, trendColor = "text-gray-400" }) => {
+const SummaryCard = ({
+  title,
+  amount,
+  subtitle,
+  icon,
+  trend,
+  trendColor = "text-gray-400",
+}) => {
   return (
     <div className="bg-white rounded-2xl border border-gray-100 p-5 shadow-sm">
       <div className="flex justify-between items-start">
@@ -14,7 +21,9 @@ const SummaryCard = ({ title, amount, subtitle, icon, trend, trendColor = "text-
       {subtitle && <p className="text-xs text-gray-400 mt-1">{subtitle}</p>}
 
       {trend && (
-        <p className={`text-xs font-medium mt-3 flex items-center gap-1 ${trendColor}`}>
+        <p
+          className={`text-xs font-medium mt-3 flex items-center gap-1 ${trendColor}`}
+        >
           {trend}
         </p>
       )}

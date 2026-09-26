@@ -43,7 +43,11 @@ const Dashboard = () => {
           amount={`₦${income.toLocaleString()}`}
           subtitle="This month"
           icon={<TrendingUp size={18} />}
-          trend={<><TrendingUp size={14} /> Increase</>}
+          trend={
+            <>
+              <TrendingUp size={14} /> Increase
+            </>
+          }
           trendColor="text-green-500"
         />
         <SummaryCard
@@ -51,7 +55,11 @@ const Dashboard = () => {
           amount={`₦${expenses.toLocaleString()}`}
           subtitle="This month"
           icon={<TrendingDown size={18} />}
-          trend={<><TrendingDown size={14} /> Decrease </>}
+          trend={
+            <>
+              <TrendingDown size={14} /> Decrease{" "}
+            </>
+          }
           trendColor="text-red-500"
         />
         <SummaryCard
