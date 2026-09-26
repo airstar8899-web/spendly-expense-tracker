@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const STORAGE_KEY = "SPENDLY_RECURRING";
+const STORAGE_KEY = "SPENDLY";
 
 const RecurringItem = () => {
   const [items, setItems] = useState(() => {
@@ -55,10 +55,10 @@ const RecurringItem = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#f5f0e6] p-6">
+    <div className="min-h-screen bg-[#efece5] p-6">
       <div className="flex justify-between items-center mb-2">
         <div>
-          <h1 className="text-2xl font-bold text-[#684C6B]">
+          <h1 className="text-3xl font-extrabold text-[#684C6B]">
             Recurring Items
           </h1>
           <p className="text-sm text-[#6b6b7a]">
@@ -67,14 +67,14 @@ const RecurringItem = () => {
         </div>
         <button
           onClick={() => setShowModal(true)}
-          className="bg-[#684C6B] text-white px-4 py-2 rounded-lg font-medium hover:bg-[#57405a]"
+          className="bg-[#684C6B] text-white px-6 py-3 rounded-full font-semibold text-base hover:bg-[#57405a] flex items-center gap-2"
         >
-          + Add Item
+          <span className="text-lg">+</span> Add Item
         </button>
       </div>
 
       {items.length === 0 ? (
-        <div className="mt-12 text-center text-[#a8a2b8]">
+        <div className="mt-6 text-center text-[#6b6b7a] bg-white border border-[#e0dccf] rounded-2xl py-10 px-6 font-medium">
           No recurring items tracked yet.
         </div>
       ) : (
