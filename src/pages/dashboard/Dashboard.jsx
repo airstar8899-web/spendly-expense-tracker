@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Wallet, TrendingUp, TrendingDown, PiggyBank } from "lucide-react";
 import SummaryCard from "../../components/reusable/card/SummaryCard";
 import QuickAction from "../../components/reusable/card/QuickAction";
 
@@ -13,10 +14,6 @@ const Dashboard = () => {
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(transactions));
   }, [transactions]);
-
-  // function addTransaction(tx) {
-  //   setTransactions((prev) => [...prev, tx]);
-  // }
 
   const total = transactions
     .filter((t) => t.type === "total")
@@ -34,26 +31,34 @@ const Dashboard = () => {
 
   return (
     <>
-      <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <SummaryCard
           title="Total Transaction"
           amount={`₦${total.toLocaleString()}`}
-          className="bg-white shadow-sm"
+          subtitle={`${transactions.length} recorded`}
+          icon={<Wallet size={18} />}
         />
         <SummaryCard
           title="Income"
           amount={`₦${income.toLocaleString()}`}
-          className="bg-white shadow-sm"
+          subtitle="This month"
+          icon={<TrendingUp size={18} />}
+          trend={<><TrendingUp size={14} /> Increase</>}
+          trendColor="text-green-500"
         />
         <SummaryCard
           title="Expenses"
           amount={`₦${expenses.toLocaleString()}`}
-          className="bg-white shadow-sm"
+          subtitle="This month"
+          icon={<TrendingDown size={18} />}
+          trend={<><TrendingDown size={14} /> Decrease </>}
+          trendColor="text-red-500"
         />
         <SummaryCard
           title="Balance"
           amount={`₦${balance.toLocaleString()}`}
-          className="bg-white shadow-sm"
+          subtitle="Available balance"
+          icon={<PiggyBank size={18} />}
         />
       </div>
 
