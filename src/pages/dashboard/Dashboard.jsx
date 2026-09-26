@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Wallet, TrendingUp, TrendingDown, PiggyBank } from "lucide-react";
 import SummaryCard from "../../components/reusable/card/SummaryCard";
 import QuickAction from "../../components/reusable/card/QuickAction";
+import TransactionList from "../../components/ui/transactionlist/TransactionList";
 
 const STORAGE_KEY = "SPENDLY!";
 
@@ -15,27 +16,25 @@ const Dashboard = () => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(transactions));
   }, [transactions]);
 
-  const total = transactions
-    .filter((t) => t.type === "total")
-    .reduce((total, t) => total + t.amount, 0);
-
   const income = transactions
     .filter((t) => t.type === "income")
-    .reduce((total, t) => total + t.amount, 0);
+    .reduce((sum, t) => sum + t.amount, 0);
 
   const expenses = transactions
     .filter((t) => t.type === "expense")
-    .reduce((total, t) => total + t.amount, 0);
+    .reduce((sum, t) => sum + t.amount, 0);
 
   const balance = income - expenses;
+
+  const recentTransactions = transactions.slice(0, 5);
 
   return (
     <>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <SummaryCard
           title="Total Transaction"
-          amount={`₦${total.toLocaleString()}`}
-          subtitle={`${transactions.length} recorded`}
+          amount={transactions.length}
+          subtitle="Transactions recorded"
           icon={<Wallet size={18} />}
         />
         <SummaryCard
@@ -57,7 +56,7 @@ const Dashboard = () => {
           icon={<TrendingDown size={18} />}
           trend={
             <>
-              <TrendingDown size={14} /> Decrease{" "}
+              <TrendingDown size={14} /> Decrease
             </>
           }
           trendColor="text-red-500"
@@ -89,6 +88,14 @@ const Dashboard = () => {
             onClick={() => alert("Transfer clicked")}
           />
         </div>
+      </div>
+
+      <div className="mt-8">
+        <TransactionList
+          transactions={recentTransactions}
+          title="Latest Activity"
+          subtitle="Your most recent transactions"
+        />
       </div>
     </>
   );
