@@ -6,6 +6,7 @@ import {
   Wallet,
   BarChart3,
   LogOut,
+  RotateCcw,
 } from "lucide-react";
 
 const navItems = [
@@ -34,6 +35,18 @@ const navItems = [
 const Sidebar = () => {
   const navigate = useNavigate();
   const location = useLocation();
+
+  const ALL_STORAGE_KEYS = ["SPENDLY!", "SPENDLY_RECURRING"];
+
+  function handleReset() {
+    const confirmed = window.confirm(
+      "This will permanently delete all your transactions and reset your balance to ₦0. Are you sure?",
+    );
+    if (confirmed) {
+      ALL_STORAGE_KEYS.forEach((key) => localStorage.removeItem(key));
+      window.location.reload();
+    }
+  }
 
   return (
     <aside className="w-16 md:w-64 bg-white border-r border-gray-100 flex flex-col py-6">
@@ -68,10 +81,21 @@ const Sidebar = () => {
         })}
       </nav>
 
+      {/* Spacer pushes bottom section down without pinning to the very edge */}
       <div className="flex-1" />
 
-      {/* Log out */}
-      <div className="px-2 md:px-3 mt-8">
+      {/* Reset + Log out */}
+      <div className="px-2 md:px-3 mt-8 flex flex-col gap-1">
+        <button
+          onClick={handleReset}
+          className="flex items-center gap-3 px-3 md:px-4 py-2.5 rounded-lg text-gray-500 hover:bg-gray-50 hover:text-[#502D55] transition justify-center md:justify-start w-full"
+        >
+          <RotateCcw size={18} />
+          <span className="hidden md:inline text-sm font-medium">
+            Reset Data
+          </span>
+        </button>
+
         <button
           onClick={() => navigate("/signin")}
           className="flex items-center gap-3 px-3 md:px-4 py-2.5 rounded-lg text-red-500 hover:bg-red-50 transition justify-center md:justify-start w-full"
