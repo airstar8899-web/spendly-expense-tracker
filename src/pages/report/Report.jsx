@@ -7,21 +7,12 @@ import {
   Tooltip,
   Legend,
   ResponsiveContainer,
-  BarChart,
-  Bar,
   XAxis,
   YAxis,
   CartesianGrid,
   LineChart,
   Line,
 } from "recharts";
-
-const budgetData = [
-  { name: "Food", budget: 500, spent: 400 },
-  { name: "Transport", budget: 350, spent: 250 },
-  { name: "Bills", budget: 400, spent: 300 },
-  { name: "Shopping", budget: 250, spent: 150 },
-];
 
 const Report = () => {
   const [transactions] = useState(() => {
@@ -98,6 +89,83 @@ const Report = () => {
     };
   });
 
+  const highestExpense = transactions
+    .filter((transaction) => transaction.type === "expense")
+    .reduce(
+      (highest, transaction) => {
+        return transaction.amount > highest.amount ? transaction : highest;
+      },
+      { amount: 0 },
+    );
+
+  const topCategory = categoryData.reduce(
+    (top, category) => {
+      return category.value > top.value ? category : top;
+    },
+    { name: "None", value: 0 },
+  );
+
+  const spendingByDay = transactions
+    .filter((transaction) => transaction.type === "expense")
+    .reduce((days, transaction) => {
+      const date = transaction.date;
+
+      if (days[date]) {
+        days[date] += transaction.amount;
+      } else {
+        days[date] = transaction.amount;
+      }
+
+      return days;
+    }, {});
+
+  const mostExpensiveDay = Object.entries(spendingByDay).reduce(
+    (highest, [date, amount]) => {
+      return amount > highest.amount ? { date, amount } : highest;
+    },
+    { date: "", amount: 0 },
+  );
+
+  const today = new Date();
+
+  const currentMonth = today.getMonth();
+  const currentYear = today.getFullYear();
+
+  const previousMonthDate = new Date();
+  previousMonthDate.setMonth(currentMonth - 1);
+
+  const currentMonthSpending = transactions
+    .filter((transaction) => {
+      if (transaction.type !== "expense") return false;
+
+      const date = new Date(transaction.date);
+
+      return (
+        date.getMonth() === currentMonth && date.getFullYear() === currentYear
+      );
+    })
+    .reduce((total, transaction) => total + transaction.amount, 0);
+
+  const previousMonthSpending = transactions
+    .filter((transaction) => {
+      if (transaction.type !== "expense") return false;
+
+      const date = new Date(transaction.date);
+
+      return (
+        date.getMonth() === previousMonthDate.getMonth() &&
+        date.getFullYear() === previousMonthDate.getFullYear()
+      );
+    })
+    .reduce((total, transaction) => total + transaction.amount, 0);
+
+  const monthlyChange =
+    previousMonthSpending > 0
+      ? ((currentMonthSpending - previousMonthSpending) /
+          previousMonthSpending) *
+        100
+      : null;
+
   const handleExportCSV = () => {
     const headers = ["Date", "Type", "Category", "Amount", "Description"];
 
@@ -129,15 +197,15 @@ const Report = () => {
   };
 
   return (
-    <div>
+    <div className="h-[calc(100vh-3rem)] overflow-y-auto">
       {/* Report Header */}
       <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h2 className="text-2xl font-bold text-[#502D55]">
+          <h2 className="text-xl sm:text-2xl font-bold text-[#502D55]">
             Reports & Analytics
           </h2>
 
-          <p className="mt-1 text-sm text-[#935073]">
+          <p className="mt-1 text-sm text-gray-500">
             Analyze your spending patterns and track your budget.
           </p>
         </div>
@@ -168,7 +236,7 @@ const Report = () => {
             See where your money is going.
           </p>
 
-          <div className="relative h-[300px]">
+          <div className="relative h-[340px]">
             <ResponsiveContainer width="100%" height="100%">
               {categoryData.length > 0 ? (
                 <PieChart>
@@ -182,10 +250,16 @@ const Report = () => {
                     outerRadius={105}
                     paddingAngle={3}
                     label={({ percent }) => `${(percent * 100).toFixed(0)}%`}
+                    labelLine={false}
                   />
 
                   <Tooltip
                     formatter={(value) => `₦${value.toLocaleString()}`}
+                    contentStyle={{
+                      borderRadius: "12px",
+                      border: "none",
+                      boxShadow: "0 4px 12px rgba(0,0,0,0.08)",
+                    }}
                   />
                   <Legend verticalAlign="bottom" height={36} />
                 </PieChart>
@@ -206,57 +280,92 @@ const Report = () => {
           </div>
         </div>
 
-        {/* Budget vs Spent */}
-        <Card className="min-h-[350px] rounded-2xl bg-white p-6 shadow-sm">
+        {/* Spending Snapshot */}
+        <Card className="rounded-2xl bg-white p-6 shadow-sm">
           <h2 className="text-lg font-semibold text-[#502D55]">
-            Budget vs Spent
+            Spending Snapshot
           </h2>
 
           <p className="mt-1 text-sm text-gray-500">
-            Compare your budget with actual spending.
+            A quick look at your spending habits.
           </p>
 
-          <div className="mt-4 h-[280px]">
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={budgetData}>
-                <CartesianGrid strokeDasharray="3 3" vertical={false} />
+          <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
+            {/* Highest Single Expense */}
+            <div className="rounded-xl bg-[#F8F4E9] p-4">
+              <p className="text-sm text-gray-500">Highest Single Expense</p>
 
-                <XAxis dataKey="name" tickLine={false} axisLine={false} />
+              <p className="mt-2 text-xl font-bold text-[#502D55]">
+                {highestExpense.amount > 0
+                  ? `₦${highestExpense.amount.toLocaleString()}`
+                  : "No data"}
+              </p>
 
-                <YAxis tickLine={false} axisLine={false} />
+              {highestExpense.category && (
+                <p className="mt-1 text-xs text-gray-500">
+                  {highestExpense.category}
+                </p>
+              )}
+            </div>
 
-                <Tooltip
-                  cursor={{ fill: "#F8F4E9" }}
-                  contentStyle={{
-                    borderRadius: "12px",
-                    border: "none",
-                    boxShadow: "0 4px 12px rgba(0,0,0,0.08)",
-                  }}
-                />
+            {/* Top Spending Category */}
+            <div className="rounded-xl bg-[#F8F4E9] p-4">
+              <p className="text-sm text-gray-500">Top Spending Category</p>
 
-                <Legend />
+              <p className="mt-2 text-xl font-bold text-[#502D55]">
+                {topCategory.name === "None" ? "No data" : topCategory.name}
+              </p>
 
-                <Bar
-                  dataKey="budget"
-                  name="Budget"
-                  fill="#C98FA6"
-                  radius={[6, 6, 0, 0]}
-                />
+              {topCategory.value > 0 && (
+                <p className="mt-1 text-xs text-gray-500">
+                  ₦{topCategory.value.toLocaleString()} spent
+                </p>
+              )}
+            </div>
 
-                <Bar
-                  dataKey="spent"
-                  name="Spent"
-                  fill="#502D55"
-                  radius={[6, 6, 0, 0]}
-                />
-              </BarChart>
-            </ResponsiveContainer>
+            {/* Most Expensive Day */}
+            <div className="rounded-xl bg-[#F8F4E9] p-4">
+              <p className="text-sm text-gray-500">Most Expensive Day</p>
+
+              <p className="mt-2 text-xl font-bold text-[#502D55]">
+                {mostExpensiveDay.date
+                  ? new Date(
+                      `${mostExpensiveDay.date}T00:00:00`,
+                    ).toLocaleDateString("en-US", {
+                      month: "short",
+                      day: "numeric",
+                      year: "numeric",
+                    })
+                  : "No data"}
+              </p>
+
+              {mostExpensiveDay.amount > 0 && (
+                <p className="mt-1 text-xs text-gray-500">
+                  ₦{mostExpensiveDay.amount.toLocaleString()} spent
+                </p>
+              )}
+            </div>
+
+            {/* Monthly Change */}
+            <div className="rounded-xl bg-[#F8F4E9] p-4">
+              <p className="text-sm text-gray-500">Monthly Change</p>
+
+              <p className="mt-2 text-xl font-bold text-[#502D55]">
+                {monthlyChange === null
+                  ? "No data"
+                  : `${monthlyChange > 0 ? "+" : ""}${monthlyChange.toFixed(1)}%`}
+              </p>
+
+              <p className="mt-1 text-xs text-gray-500">
+                Compared with last month
+              </p>
+            </div>
           </div>
         </Card>
       </div>
 
       {/* Spending Trend */}
-      <Card className="mt-6 min-h-[400px] rounded-2xl bg-white p-6 shadow-sm">
+      <Card className="mt-6 rounded-2xl bg-white p-6 shadow-sm">
         <h2 className="text-lg font-semibold text-[#502D55]">
           Spending Trend (Last 12 Months)
         </h2>
@@ -265,7 +374,7 @@ const Report = () => {
           Track how your spending changes over time.
         </p>
 
-        <div className="mt-4 h-[320px]">
+        <div className="mt-4 h-[280px] sm:h-[320px]">
           <ResponsiveContainer width="100%" height="100%">
             {transactions.some(
               (transaction) => transaction.type === "expense",
