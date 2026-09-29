@@ -20,7 +20,7 @@ const BalanceSummary = () => {
   const balance = income - expenses;
 
   return (
-    <div className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
+    <div className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm mt-5">
       <div className="flex justify-between items-start">
         <p className="text-sm text-gray-500">Current Balance</p>
         <div className="w-9 h-9 rounded-lg bg-gray-50 flex items-center justify-center text-gray-500">

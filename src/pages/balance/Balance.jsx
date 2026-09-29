@@ -2,7 +2,7 @@ import BalanceSummary from "../../components/ui/balancesummary/BalanceSummary";
 
 const Balance = () => {
   return (
-    <div className="sticky top-0 z-40 bg-[#F8F8FC] py-4 mb-6">
+    <div className="sticky top-0 z-40 bg-[#F8F8FC] py-2 mb-6">
       <hr className="border-gray-200 mb-5" />
 
       <h1 className="text-3xl font-bold text-gray-800">Balance</h1>
