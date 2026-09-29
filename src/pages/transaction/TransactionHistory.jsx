@@ -14,14 +14,22 @@ const TransactionHistory = () => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(transactions));
   }, [transactions]);
 
-  function handleAddTransaction(newTransaction) {
-    setTransactions((prev) => [newTransaction, ...prev]);
-  }
+  const handleAddTransaction = (newTransaction) => {
+    setTransactions((previousTransactions) => [
+      newTransaction,
+      ...previousTransactions,
+    ]);
+  };
 
   return (
-    <div>
-      <TransactionForm onAddTransaction={handleAddTransaction} />
-      <TransactionList transactions={transactions} />
+    <div className="w-full max-w-6xl mx-auto px-4 py-6">
+      <TransactionForm
+        onAddTransaction={handleAddTransaction}
+      />
+
+      <TransactionList
+        transactions={transactions}
+      />
     </div>
   );
 };
