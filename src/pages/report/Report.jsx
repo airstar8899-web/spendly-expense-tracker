@@ -1,6 +1,9 @@
 import { useState } from "react";
+import { Download } from "lucide-react";
+
 import Card from "../../components/reusable/card/Card";
 import Button from "../../components/reusable/button/Button";
+
 import {
   PieChart,
   Pie,
@@ -20,15 +23,9 @@ const Report = () => {
     return saved ? JSON.parse(saved) : [];
   });
 
-  const income = transactions
-    .filter((transaction) => transaction.type === "income")
-    .reduce((total, transaction) => total + transaction.amount, 0);
-
   const expenses = transactions
     .filter((transaction) => transaction.type === "expense")
     .reduce((total, transaction) => total + transaction.amount, 0);
-
-  const balance = income - expenses;
 
   const categoryColors = {
     Food: "#502D55",
@@ -197,7 +194,7 @@ const Report = () => {
   };
 
   return (
-    <div className="h-[calc(100vh-3rem)] overflow-y-auto">
+    <div>
       {/* Report Header */}
       <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
@@ -211,14 +208,19 @@ const Report = () => {
         </div>
 
         <div className="flex flex-wrap gap-3">
-          <Button className="rounded-lg border border-[#502D55] px-4 py-2 text-sm font-medium text-[#502D55] hover:bg-[#F6DBC0]">
+          <Button
+            onClick={() => alert("PDF export is not available yet.")}
+            className="flex items-center gap-2 rounded-lg border border-[#502D55] px-4 py-2 text-sm font-medium text-[#502D55] hover:bg-[#F6DBC0]"
+          >
+            <Download size={16} />
             PDF
           </Button>
 
           <Button
             onClick={handleExportCSV}
-            className="rounded-lg bg-[#502D55] px-4 py-2 text-sm font-medium text-white hover:bg-[#935073]"
+            className="flex items-center gap-2 rounded-lg bg-[#502D55] px-4 py-2 text-sm font-medium text-white hover:bg-[#935073]"
           >
+            <Download size={16} />
             CSV
           </Button>
         </div>
