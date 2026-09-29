@@ -3,17 +3,10 @@ import Sidebar from "../sidebar/SideBar";
 
 const Layout = () => {
   return (
-    <div className="min-h-screen bg-[#F8F8FC] flex">
+    <div className="min-h-screen bg-[#F8F8FC]">
       <Sidebar />
 
-      <div className="flex-1 p-6">
-        <div className="flex justify-between items-center mb-6">
-          <div>
-            <h1 className="text-2xl font-bold">~Spend Smarter</h1>
-            <p className="text-gray-500 mt-1">Here's your financial overview</p>
-          </div>
-        </div>
-
+      <div className="ml-16 md:ml-64 p-13">
         <Outlet />
       </div>
     </div>

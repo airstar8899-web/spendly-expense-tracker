@@ -55,12 +55,11 @@ const RecurringItem = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#efece5] p-[16.5px]">
+    <div className="sticky top-0 z-40 bg-[#F8F8FC] py-4 mb-6">
+      <hr className="border-gray-200 mb-5" />
       <div className="flex justify-between items-center mb-6">
         <div>
-          <h1 className="text-3xl font-extrabold text-[#684C6B]">
-            Recurring Items
-          </h1>
+          <h1 className="text-3xl font-bold">Recurring Items</h1>
           <p className="text-sm text-[#6b6b7a] mt-1">
             Track household essentials and reorder schedules
           </p>
@@ -74,7 +73,7 @@ const RecurringItem = () => {
       </div>
 
       {items.length === 0 ? (
-        <div className="mt-6 text-center text-[#6b6b7a] bg-white border border-[#e0dccf] rounded-2xl py-16 px-6 font-medium">
+        <div className="mt-6 text-center text-[#6b6b7a] border border-[#e0dccf] rounded-2xl py-16 px-6 font-medium bg-[#F8F4E9] p-[16.5px]">
           No recurring items tracked yet.
         </div>
       ) : (

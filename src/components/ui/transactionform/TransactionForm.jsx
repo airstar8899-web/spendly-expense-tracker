@@ -43,7 +43,7 @@ const TransactionForm = ({ onAddTransaction }) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-full max-w-2xl mx-auto rounded-2xl bg-[#efece5] p-5 shadow-lg sm:p-8"
+      className="w-full max-w-2xl mx-auto rounded-2xl bg-[#F8F4E9] p-5 shadow-lg sm:p-8"
     >
       {/* Heading */}
       <div className="mb-6">
