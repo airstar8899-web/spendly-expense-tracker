@@ -10,13 +10,11 @@ const TransactionForm = ({ onAddTransaction }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Check that required fields are filled
     if (!amount || !category || !date) {
       alert("Please fill in all required fields.");
       return;
     }
 
-    // Create the transaction
     const newTransaction = {
       id: Date.now(),
       type,
@@ -26,15 +24,12 @@ const TransactionForm = ({ onAddTransaction }) => {
       description,
     };
 
-
-    
     if (onAddTransaction) {
       onAddTransaction(newTransaction);
     }
 
     console.log("New Transaction:", newTransaction);
 
-    // Clear the form
     setType("expense");
     setAmount("");
     setCategory("");
@@ -45,9 +40,8 @@ const TransactionForm = ({ onAddTransaction }) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-full max-w-2xl mx-auto rounded-2xl bg-[#F8F4E9] p-5 shadow-lg sm:p-8"
+      className="mx-auto w-full max-w-2xl rounded-2xl bg-[#F8F4E9] p-5 shadow-lg sm:p-8"
     >
-      {/* Heading */}
       <div className="mb-6">
         <h2 className="text-2xl font-bold text-[#502D55] sm:text-3xl">
           Add a Transaction
@@ -55,10 +49,9 @@ const TransactionForm = ({ onAddTransaction }) => {
 
         <p className="mt-2 text-sm text-[#502D55]/70">
           Keep track of your income and expenses
-      </p>
-     </div>
+        </p>
+      </div>
 
-      {/* Income / Expense */}
       <div className="mb-5">
         <label className="mb-2 block font-semibold text-[#502D55]">
           Type
@@ -91,7 +84,6 @@ const TransactionForm = ({ onAddTransaction }) => {
         </div>
       </div>
 
-      {/* Amount */}
       <div className="mb-5">
         <label
           htmlFor="amount"
@@ -111,9 +103,7 @@ const TransactionForm = ({ onAddTransaction }) => {
         />
       </div>
 
-      {/* Category and Date */}
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-        {/* Category */}
         <div>
           <label
             htmlFor="category"
@@ -139,7 +129,6 @@ const TransactionForm = ({ onAddTransaction }) => {
           </select>
         </div>
 
-        {/* Date */}
         <div>
           <label
             htmlFor="date"
@@ -158,7 +147,6 @@ const TransactionForm = ({ onAddTransaction }) => {
         </div>
       </div>
 
-      {/* Description */}
       <div className="my-5">
         <label
           htmlFor="description"
@@ -178,9 +166,9 @@ const TransactionForm = ({ onAddTransaction }) => {
           onChange={(e) => setDescription(e.target.value)}
           className="w-full resize-none rounded-lg border border-[#935073]/30 bg-white p-3 text-[#502D55] outline-none focus:border-[#935073] focus:ring-2 focus:ring-[#935073]/20"
         />
+
       </div>
 
-      {/* Submit */}
       <button
         type="submit"
         className="w-full rounded-lg bg-[#935073] py-3 font-semibold text-[#F8F4E9] transition hover:bg-[#502D55] focus:outline-none focus:ring-2 focus:ring-[#935073] focus:ring-offset-2"
