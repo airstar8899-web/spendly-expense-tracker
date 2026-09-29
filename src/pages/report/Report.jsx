@@ -381,11 +381,11 @@ const Report = () => {
           Track how your spending changes over time.
         </p>
 
-        <div className="mt-4 h-[70] sm:h-[80]">
-          <ResponsiveContainer width="100%" height="100%">
-            {transactions.some(
-              (transaction) => transaction.type === "expense",
-            ) ? (
+        <div className="mt-4 h-70 sm:h-80">
+          {transactions.some(
+            (transaction) => transaction.type === "expense",
+          ) ? (
+            <ResponsiveContainer width="100%" height="100%">
               <LineChart data={spendingData}>
                 <CartesianGrid strokeDasharray="3 3" vertical={false} />
 
@@ -413,12 +413,12 @@ const Report = () => {
                   activeDot={{ r: 6 }}
                 />
               </LineChart>
-            ) : (
-              <div className="flex h-full items-center justify-center text-sm text-gray-500">
-                No spending data yet.
-              </div>
-            )}
-          </ResponsiveContainer>
+            </ResponsiveContainer>
+          ) : (
+            <div className="flex h-full items-center justify-center text-sm text-gray-500">
+              No spending data yet.
+            </div>
+          )}
         </div>
       </Card>
     </div>
