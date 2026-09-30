@@ -8,9 +8,9 @@ import {
   CheckCircle2,
 } from "lucide-react";
 
-import Features from "./Features";
-import Analytics from "./Analytics";
-import Security from "./Security";
+import Features from "../../components/welcome/Features";
+import Analytics from "../../components/welcome/Analytics";
+import Security from "../../components/welcome/Security";
 
 const Welcome = () => {
   const navigate = useNavigate();
