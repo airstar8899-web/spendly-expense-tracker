@@ -2,6 +2,15 @@
 
 body {
   margin: 0;
-  font-family: "Google Sans", sans-serif;
+  font-family: "Poppins", system-ui, sans-serif;
   font-optical-sizing: auto;
+}
+
+@media print {
+  aside {
+    display: none !important;
+  }
+  .print\:hidden {
+    display: none !important;
+  }
 }

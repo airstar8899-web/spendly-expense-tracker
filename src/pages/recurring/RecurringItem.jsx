@@ -56,10 +56,10 @@ const RecurringItem = () => {
 
   return (
     <div className="sticky top-0 z-40 bg-[#F8F8FC] py-2 mb-6">
-      <hr className="border-gray-200 mb-5" />
+      <hr className="border-gray-200 mb-4" />
       <div className="flex justify-between items-center mb-6">
         <div>
-          <h1 className="text-3xl font-bold">Recurring Items</h1>
+          <h1 className="text-3xl font-semibold">Recurring Items</h1>
           <p className="text-sm text-[#6b6b7a] mt-1">
             Track household essentials and reorder schedules
           </p>

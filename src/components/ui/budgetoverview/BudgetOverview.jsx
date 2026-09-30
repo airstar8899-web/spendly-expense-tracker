@@ -48,7 +48,9 @@ const BudgetOverview = ({ transactions = [] }) => {
 
       <div className="flex justify-between items-center mt-6 pt-4 border-t border-gray-100">
         <span className="font-semibold text-gray-800">Total</span>
-        <span className="font-bold text-gray-800">₦{total.toLocaleString()}</span>
+        <span className="font-bold text-gray-800">
+          ₦{total.toLocaleString()}
+        </span>
       </div>
     </div>
   );

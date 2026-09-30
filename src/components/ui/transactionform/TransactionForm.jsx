@@ -1,24 +1,39 @@
 import { useState } from "react";
 
-const TransactionForm = ({ onAddTransaction }) => {
-  const [type, setType] = useState("expense");
-  const [amount, setAmount] = useState("");
-  const [category, setCategory] = useState("");
-  const [date, setDate] = useState("");
-  const [description, setDescription] = useState("");
+const TransactionForm = ({ onSave, editingTransaction, onCancelEdit }) => {
+  const [type, setType] = useState(editingTransaction?.type || "expense");
+  const [amount, setAmount] = useState(
+    editingTransaction ? String(editingTransaction.amount) : "",
+  );
+  const [category, setCategory] = useState(editingTransaction?.category || "");
+  const [date, setDate] = useState(editingTransaction?.date || "");
+  const [description, setDescription] = useState(
+    editingTransaction?.description || "",
+  );
+  const [errors, setErrors] = useState({});
+
+  const validate = () => {
+    const newErrors = {};
+    if (!amount || Number(amount) <= 0) {
+      newErrors.amount = "Enter a valid amount greater than 0.";
+    }
+    if (!category) {
+      newErrors.category = "Please select a category.";
+    }
+    if (!date) {
+      newErrors.date = "Please choose a date.";
+    }
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Check that required fields are filled
-    if (!amount || !category || !date) {
-      alert("Please fill in all required fields.");
-      return;
-    }
+    if (!validate()) return;
 
-    // Create the transaction
-    const newTransaction = {
-      id: Date.now(),
+    const transaction = {
+      id: editingTransaction ? editingTransaction.id : Date.now(),
       type,
       amount: Number(amount),
       category,
@@ -26,29 +41,26 @@ const TransactionForm = ({ onAddTransaction }) => {
       description,
     };
 
-    if (onAddTransaction) {
-      onAddTransaction(newTransaction);
+    if (onSave) {
+      onSave(transaction);
     }
 
-    console.log("New Transaction:", newTransaction);
-
-    // Clear the form
     setType("expense");
     setAmount("");
     setCategory("");
     setDate("");
     setDescription("");
+    setErrors({});
   };
 
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-full max-w-2xl mx-auto rounded-2xl bg-[#F8F4E9] p-5 shadow-lg sm:p-8"
+      className="mx-auto w-full max-w-2xl rounded-2xl bg-[#F8F4E9] p-5 shadow-lg sm:p-8"
     >
-      {/* Heading */}
       <div className="mb-6">
         <h2 className="text-2xl font-bold text-[#502D55] sm:text-3xl">
-          Add a Transaction
+          {editingTransaction ? "Edit Transaction" : "Add a Transaction"}
         </h2>
 
         <p className="mt-2 text-sm text-[#502D55]/70">
@@ -56,7 +68,6 @@ const TransactionForm = ({ onAddTransaction }) => {
         </p>
       </div>
 
-      {/* Income / Expense */}
       <div className="mb-5">
         <label className="mb-2 block font-semibold text-[#502D55]">Type</label>
 
@@ -87,7 +98,6 @@ const TransactionForm = ({ onAddTransaction }) => {
         </div>
       </div>
 
-      {/* Amount */}
       <div className="mb-5">
         <label
           htmlFor="amount"
@@ -103,13 +113,18 @@ const TransactionForm = ({ onAddTransaction }) => {
           placeholder="₦ 0.00"
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
-          className="w-full rounded-lg border border-[#935073]/30 bg-white p-3 text-[#502D55] outline-none transition focus:border-[#935073] focus:ring-2 focus:ring-[#935073]/20"
+          className={`w-full rounded-lg border bg-white p-3 text-[#502D55] outline-none transition focus:ring-2 ${
+            errors.amount
+              ? "border-red-400 focus:border-red-400 focus:ring-red-100"
+              : "border-[#935073]/30 focus:border-[#935073] focus:ring-[#935073]/20"
+          }`}
         />
+        {errors.amount && (
+          <p className="mt-1 text-xs text-red-500">{errors.amount}</p>
+        )}
       </div>
 
-      {/* Category and Date */}
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-        {/* Category */}
         <div>
           <label
             htmlFor="category"
@@ -122,7 +137,11 @@ const TransactionForm = ({ onAddTransaction }) => {
             id="category"
             value={category}
             onChange={(e) => setCategory(e.target.value)}
-            className="w-full rounded-lg border border-[#935073]/30 bg-white p-3 text-[#502D55] outline-none focus:border-[#935073] focus:ring-2 focus:ring-[#935073]/20"
+            className={`w-full rounded-lg border bg-white p-3 text-[#502D55] outline-none focus:ring-2 ${
+              errors.category
+                ? "border-red-400 focus:border-red-400 focus:ring-red-100"
+                : "border-[#935073]/30 focus:border-[#935073] focus:ring-[#935073]/20"
+            }`}
           >
             <option value="">Select category</option>
             <option value="Food">Food</option>
@@ -133,9 +152,11 @@ const TransactionForm = ({ onAddTransaction }) => {
             <option value="Relocation plans">Relocation plans</option>
             <option value="Miscellaneous">Miscellaneous</option>
           </select>
+          {errors.category && (
+            <p className="mt-1 text-xs text-red-500">{errors.category}</p>
+          )}
         </div>
 
-        {/* Date */}
         <div>
           <label
             htmlFor="date"
@@ -149,12 +170,18 @@ const TransactionForm = ({ onAddTransaction }) => {
             type="date"
             value={date}
             onChange={(e) => setDate(e.target.value)}
-            className="w-full rounded-lg border border-[#935073]/30 bg-white p-3 text-[#502D55] outline-none focus:border-[#935073] focus:ring-2 focus:ring-[#935073]/20"
+            className={`w-full rounded-lg border bg-white p-3 text-[#502D55] outline-none focus:ring-2 ${
+              errors.date
+                ? "border-red-400 focus:border-red-400 focus:ring-red-100"
+                : "border-[#935073]/30 focus:border-[#935073] focus:ring-[#935073]/20"
+            }`}
           />
+          {errors.date && (
+            <p className="mt-1 text-xs text-red-500">{errors.date}</p>
+          )}
         </div>
       </div>
 
-      {/* Description */}
       <div className="my-5">
         <label
           htmlFor="description"
@@ -174,13 +201,23 @@ const TransactionForm = ({ onAddTransaction }) => {
         />
       </div>
 
-      {/* Submit */}
-      <button
-        type="submit"
-        className="w-full rounded-lg bg-[#935073] py-3 font-semibold text-[#F8F4E9] transition hover:bg-[#502D55] focus:outline-none focus:ring-2 focus:ring-[#935073] focus:ring-offset-2"
-      >
-        + Add Transaction
-      </button>
+      <div className="flex gap-3">
+        {editingTransaction && (
+          <button
+            type="button"
+            onClick={onCancelEdit}
+            className="flex-1 rounded-lg border border-[#935073]/40 py-3 font-semibold text-[#502D55] transition hover:bg-[#F6DBC0]"
+          >
+            Cancel
+          </button>
+        )}
+        <button
+          type="submit"
+          className="flex-1 rounded-lg bg-[#935073] py-3 font-semibold text-[#F8F4E9] transition hover:bg-[#502D55] focus:outline-none focus:ring-2 focus:ring-[#935073] focus:ring-offset-2"
+        >
+          {editingTransaction ? "Update Transaction" : "+ Add Transaction"}
+        </button>
+      </div>
     </form>
   );
 };

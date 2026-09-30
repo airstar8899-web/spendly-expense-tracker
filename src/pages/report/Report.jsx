@@ -193,14 +193,18 @@ const Report = () => {
     URL.revokeObjectURL(url);
   };
 
+  const handleExportPDF = () => {
+    window.print();
+  };
+
   return (
     <div>
       {/* Report Header */}
       <div className="sticky top-0 z-40 bg-[#F8F8FC] py-2 mb-6">
-        <hr className="border-gray-200 mb-5" />
+        <hr className="border-gray-200 mb-4" />
         <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <h2 className="text-3xl sm:text-3xl font-bold text-gray-800">
+            <h2 className="text-3xl sm:text-3xl font-semibold text-gray-800">
               Reports & Analytics
             </h2>
 
@@ -208,24 +212,24 @@ const Report = () => {
               Analyze your spending patterns and track your budget.
             </p>
           </div>
-        </div>
 
-        <div className="flex flex-wrap gap-3">
-          <Button
-            onClick={() => alert("PDF export is not available yet.")}
-            className="flex items-center gap-2 rounded-lg border border-[#502D55] px-4 py-2 text-sm font-medium text-[#502D55] hover:bg-[#F6DBC0]"
-          >
-            <Download size={16} />
-            PDF
-          </Button>
+          <div className="flex flex-wrap gap-3 print:hidden">
+            <Button
+              onClick={handleExportPDF}
+              className="flex items-center gap-2 rounded-lg border border-[#502D55] px-4 py-2 text-sm font-medium text-[#502D55] hover:bg-[#F6DBC0]"
+            >
+              <Download size={16} />
+              PDF
+            </Button>
 
-          <Button
-            onClick={handleExportCSV}
-            className="flex items-center gap-2 rounded-lg bg-[#502D55] px-4 py-2 text-sm font-medium text-white hover:bg-[#935073]"
-          >
-            <Download size={16} />
-            CSV
-          </Button>
+            <Button
+              onClick={handleExportCSV}
+              className="flex items-center gap-2 rounded-lg bg-[#502D55] px-4 py-2 text-sm font-medium text-white hover:bg-[#935073]"
+            >
+              <Download size={16} />
+              CSV
+            </Button>
+          </div>
         </div>
       </div>
 
@@ -241,7 +245,6 @@ const Report = () => {
             See where your money is going.
           </p>
 
-          {/* Responsive chart area */}
           <div className="relative mt-4 h-85">
             {categoryData.length > 0 ? (
               <ResponsiveContainer width="100%" height="100%">
@@ -298,7 +301,6 @@ const Report = () => {
           </p>
 
           <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
-            {/* Highest Single Expense */}
             <div className="rounded-xl bg-[#F8F4E9] p-4">
               <p className="text-sm text-gray-500">Highest Single Expense</p>
 
@@ -315,7 +317,6 @@ const Report = () => {
               )}
             </div>
 
-            {/* Top Spending Category */}
             <div className="rounded-xl bg-[#F8F4E9] p-4">
               <p className="text-sm text-gray-500">Top Spending Category</p>
 
@@ -330,7 +331,6 @@ const Report = () => {
               )}
             </div>
 
-            {/* Most Expensive Day */}
             <div className="rounded-xl bg-[#F8F4E9] p-4">
               <p className="text-sm text-gray-500">Most Expensive Day</p>
 
@@ -353,7 +353,6 @@ const Report = () => {
               )}
             </div>
 
-            {/* Monthly Change */}
             <div className="rounded-xl bg-[#F8F4E9] p-4">
               <p className="text-sm text-gray-500">Monthly Change</p>
 
