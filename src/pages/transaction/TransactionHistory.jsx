@@ -102,8 +102,7 @@ const TransactionHistory = () => {
             placeholder="Search transactions..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full border border-gray-200 rounded-full pl-9 pr-4 py-2.5 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-[#935073]/30 focus:border-[#935073]"
-          />
+            className="w-full border border-gray-200 rounded-full pl-9 pr-4 py-2.5 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-[#935073]/30 focus:border-[#935073]" />
         </div>
 
         <p className="text-sm font-medium text-gray-700 mb-2">Categories</p>
