@@ -6,7 +6,6 @@ import {
   TrendingDown,
   CheckCircle2,
 } from "lucide-react";
-
 const Welcome = () => {
   const navigate = useNavigate();
 
@@ -24,16 +23,25 @@ const Welcome = () => {
         </div>
 
         <nav className="hidden md:flex items-center gap-8 text-sm text-[#6B3F63] font-medium">
-          <a href="#features" className="hover:text-[#502D55] transition">
-            Features
-          </a>
-          <a href="#analytics" className="hover:text-[#502D55] transition">
-            Analytics
-          </a>
-          <a href="#security" className="hover:text-[#502D55] transition">
-            Security
-          </a>
-        </nav>
+  <button 
+    onClick={() => navigate("/features")} 
+    className="hover:text-[#502D55] transition cursor-pointer"
+  >
+    Features
+  </button>
+  <button 
+    onClick={() => navigate("/analytics")} 
+    className="hover:text-[#502D55] transition cursor-pointer"
+  >
+    Analytics
+  </button>
+  <button 
+    onClick={() => navigate("/security")} 
+    className="hover:text-[#502D55] transition cursor-pointer"
+  >
+    Security
+  </button>
+</nav>
 
         <div className="flex items-center gap-3">
           <button
