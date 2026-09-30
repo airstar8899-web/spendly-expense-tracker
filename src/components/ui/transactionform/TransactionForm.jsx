@@ -56,7 +56,7 @@ const TransactionForm = ({ onSave, editingTransaction, onCancelEdit }) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="mx-auto w-full max-w-2xl rounded-2xl bg-[#F8F4E9] p-5 shadow-lg sm:p-8"
+      className="mx-auto w-full max-w-2xl rounded-2xl bg-[#F8F4E9] p-4 shadow-lg sm:p-8"
     >
       <div className="mb-6">
         <h2 className="text-2xl font-bold text-[#502D55] sm:text-3xl">
@@ -201,7 +201,7 @@ const TransactionForm = ({ onSave, editingTransaction, onCancelEdit }) => {
         />
       </div>
 
-      <div className="flex gap-3">
+      <div className="flex flex-col gap-3 sm:flex-row">
         {editingTransaction && (
           <button
             type="button"
