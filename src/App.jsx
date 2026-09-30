@@ -8,17 +8,12 @@ import Balance from "./pages/balance/Balance";
 import RecurringItems from "./pages/recurring/RecurringItem";
 import Report from "./pages/report/Report";
 import Layout from "./components/reusable/sidebar/Layout";
-import Features from "./components/welcome/Features";
-import Analytics from "./components/welcome/Analytics";
-import Security from "./components/welcome/Security";
+
 const App = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Welcome />} />
-        <Route path="/features" element={<Features />} />
-        <Route path="/analytics" element={<Analytics />} />
-        <Route path="/security" element={<Security />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
 
