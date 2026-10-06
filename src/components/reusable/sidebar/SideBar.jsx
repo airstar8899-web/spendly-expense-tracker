@@ -40,7 +40,7 @@ const Sidebar = () => {
 
   function handleReset() {
     const confirmed = window.confirm(
-      "This will permanently delete all your transactions and reset your balance to ₦0. Are you sure?",
+      "This will permanently delete all your transactions and reset your balance toâ‚¦0. Are you sure?",
     );
     if (confirmed) {
       ALL_STORAGE_KEYS.forEach((key) => localStorage.removeItem(key));
@@ -52,9 +52,13 @@ const Sidebar = () => {
     <aside className="fixed left-0 top-0 h-screen w-16 md:w-64 bg-white border-r border-gray-100 flex flex-col py-6">
       {/* Logo */}
       <div className="px-4 md:px-6 mb-8 flex items-center justify-center md:justify-start gap-2">
-        <div className="w-8 h-8 rounded-lg bg-[#502D55] flex items-center justify-center text-white text-sm font-bold">
+        <button
+          onClick={() => window.innerWidth < 768 && navigate("/signin")}
+          className="w-8 h-8 rounded-lg bg-[#502D55] flex items-center justify-center text-white text-sm font-bold cursor-pointer md:cursor-default"
+        >
           S
-        </div>
+        </button>
+
         <span className="hidden md:inline text-lg font-bold text-[#502D55]">
           Spendly
         </span>
