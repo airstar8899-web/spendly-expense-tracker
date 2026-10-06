@@ -70,7 +70,7 @@ const TransactionList = ({ transactions, onDelete, onEdit }) => {
                             className="text-gray-300 hover:text-red-500"
                             aria-label="Delete transaction"
                           >
-                            <X size={12} />
+                            <X size={16} />
                           </button>
                         )}
                       </div>
@@ -116,7 +116,7 @@ const TransactionList = ({ transactions, onDelete, onEdit }) => {
                     className="text-gray-300 hover:text-red-500"
                     aria-label="Delete transaction"
                   >
-                    <X size={12} />
+                    <X size={16} />
                   </button>
                 )}
               </div>

@@ -148,7 +148,7 @@ const TransactionHistory = () => {
               className="absolute top-4 right-4 z-10 w-8 h-8 rounded-full bg-white/90 shadow flex items-center justify-center text-gray-500 hover:text-red-500 hover:bg-white transition"
               aria-label="Close"
             >
-              <X size={12} />
+              <X size={14} />
             </button>
 
             <TransactionForm
