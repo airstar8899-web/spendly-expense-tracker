@@ -2,16 +2,80 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../../components/reusable/button/Button";
 import SocialLogin from "../../components/reusable/Icons/SocialLogin";
+import { supabase } from "../../superbase/superbase";
 
 const SignIn = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false); // ← NEW (needed for the show/hide toggle)
+  const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  function handleSubmit(e) {
+  // Forgot password modal state
+  const [showForgotModal, setShowForgotModal] = useState(false);
+  const [resetEmail, setResetEmail] = useState("");
+  const [resetSent, setResetSent] = useState(false);
+  const [resetError, setResetError] = useState("");
+  const [resetLoading, setResetLoading] = useState(false);
+
+  async function handleSubmit(e) {
     e.preventDefault();
-    navigate("/dashboard");
+    setError("");
+    setLoading(true);
+
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    setLoading(false);
+
+    if (error) {
+      if (error.message === "Email not confirmed") {
+        setError(
+          "Please confirm your email before signing in. Check your inbox for the confirmation link.",
+        );
+      } else {
+        setError(error.message);
+      }
+      return;
+    }
+
+    if (data.session) {
+      navigate("/dashboard");
+    }
+  }
+
+  async function handleForgotSubmit(e) {
+    e.preventDefault();
+    setResetError("");
+    setResetLoading(true);
+
+    // supabase.auth.resetPasswordForEmail() sends an email with a link.
+    // redirectTo tells Supabase where to send the user AFTER they click
+    // that link — it must point at our ResetPassword page, and this exact
+    // URL also needs to be added to Supabase's allowed Redirect URLs list
+    // (Authentication → URL Configuration) or the link won't work.
+    const { error } = await supabase.auth.resetPasswordForEmail(resetEmail, {
+      redirectTo: `${window.location.origin}/reset-password`,
+    });
+
+    setResetLoading(false);
+
+    if (error) {
+      setResetError(error.message);
+      return;
+    }
+
+    setResetSent(true);
+  }
+
+  function closeForgotModal() {
+    setShowForgotModal(false);
+    setResetEmail("");
+    setResetSent(false);
+    setResetError("");
   }
 
   return (
@@ -49,11 +113,6 @@ const SignIn = () => {
           Back To Home
         </button>
 
-        {/* ⬇️ CHANGE 1: CENTERED CARD ⬇️
-            Was:  className="bg-white rounded-3xl shadow-lg p-9"
-            Now:  added "max-w-md w-full mx-auto" — mx-auto (not md:mx-0)
-            keeps it centered on every screen size, unlike Sign Up
-            which uses md:mx-0 to push it left on desktop. */}
         <div className="bg-white rounded-3xl shadow-lg p-9 max-w-md w-full mx-auto">
           <h2 className="text-[#502D55] text-2xl font-bold mb-1">
             Welcome Back
@@ -65,10 +124,6 @@ const SignIn = () => {
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label className="text-xs text-[#6B5A47]">Email</label>
-              {/* ⬇️ CHANGE 2: EMAIL ICON + FOCUS RING ⬇️
-                  Was: plain <input> with no wrapper, no icon
-                  Now: wrapped in relative div, added envelope icon,
-                  added pl-9 (room for icon) and focus:ring classes */}
               <div className="relative mt-1">
                 <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[#B0A190]">
                   <svg
@@ -95,11 +150,6 @@ const SignIn = () => {
 
             <div>
               <label className="text-xs text-[#6B5A47]">Password</label>
-              {/* ⬇️ CHANGE 3: PASSWORD ICON + SHOW/HIDE + FOCUS RING ⬇️
-                  Was: plain <input type="password"> with no wrapper
-                  Now: wrapped in relative div, lock icon added on left,
-                  show/hide toggle button added on right (uses new
-                  showPassword state), focus:ring added */}
               <div className="relative mt-1">
                 <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[#B0A190]">
                   <svg
@@ -136,16 +186,23 @@ const SignIn = () => {
                 <input type="checkbox" className="accent-[#502D55]" /> Remember
                 me
               </label>
-              <span className="text-[#8d5d76] font-medium hover:underline cursor-pointer">
+              <button
+                type="button"
+                onClick={() => setShowForgotModal(true)}
+                className="text-[#8d5d76] font-medium hover:underline cursor-pointer"
+              >
                 Forgot password?
-              </span>
+              </button>
             </div>
+
+            {error && <p className="text-xs text-[#6B2E43]">{error}</p>}
 
             <Button
               type="submit"
-              className="w-full bg-[#502D55] hover:bg-[#3f2244] text-[#F8F4E9] font-semibold py-3 rounded-lg mt-2 transition"
+              disabled={loading}
+              className="w-full bg-[#502D55] hover:bg-[#3f2244] text-[#F8F4E9] font-semibold py-3 rounded-lg mt-2 transition disabled:opacity-60"
             >
-              Sign in
+              {loading ? "Signing in..." : "Sign in"}
             </Button>
           </form>
 
@@ -163,6 +220,67 @@ const SignIn = () => {
           </div>
         </div>
       </div>
+
+      {/* Forgot password modal */}
+      {showForgotModal && (
+        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-2xl p-6 w-full max-w-sm shadow-lg relative">
+            <button
+              onClick={closeForgotModal}
+              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-sm"
+            >
+              ✕
+            </button>
+
+            {resetSent ? (
+              <div className="text-center pt-2">
+                <h3 className="text-[#502D55] text-lg font-bold mb-2">
+                  Check your email
+                </h3>
+                <p className="text-sm text-[#6B5A47] mb-4">
+                  We've sent a password reset link to{" "}
+                  <span className="font-semibold">{resetEmail}</span>.
+                </p>
+                <Button
+                  onClick={closeForgotModal}
+                  className="w-full bg-[#502D55] hover:bg-[#3f2244] text-[#F8F4E9] font-semibold py-2.5 rounded-lg transition"
+                >
+                  Close
+                </Button>
+              </div>
+            ) : (
+              <>
+                <h3 className="text-[#502D55] text-lg font-bold mb-1">
+                  Reset your password
+                </h3>
+                <p className="text-sm text-[#6B5A47] mb-4">
+                  Enter your email and we'll send you a reset link.
+                </p>
+                <form onSubmit={handleForgotSubmit} className="space-y-3">
+                  <input
+                    type="email"
+                    required
+                    placeholder="Enter your email"
+                    value={resetEmail}
+                    onChange={(e) => setResetEmail(e.target.value)}
+                    className="w-full border border-[#DEDAD0] rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[#935073]/40 focus:border-[#935073] transition"
+                  />
+                  {resetError && (
+                    <p className="text-xs text-[#6B2E43]">{resetError}</p>
+                  )}
+                  <Button
+                    type="submit"
+                    disabled={resetLoading}
+                    className="w-full bg-[#502D55] hover:bg-[#3f2244] text-[#F8F4E9] font-semibold py-2.5 rounded-lg transition disabled:opacity-60"
+                  >
+                    {resetLoading ? "Sending..." : "Send reset link"}
+                  </Button>
+                </form>
+              </>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 };

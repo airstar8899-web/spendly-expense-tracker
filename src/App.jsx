@@ -8,6 +8,9 @@ import Balance from "./pages/balance/Balance";
 import RecurringItems from "./pages/recurring/RecurringItem";
 import Report from "./pages/report/Report";
 import Layout from "./components/reusable/sidebar/Layout";
+import ResetPassword from "./pages/resetpassword/ResetPassword";
+
+// console.log(import.meta.env.VITE_SUPABASE_URL);
 
 const App = () => {
   return (
@@ -16,6 +19,7 @@ const App = () => {
         <Route path="/" element={<Welcome />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
 
         <Route element={<Layout />}>
           <Route path="/dashboard" element={<Dashboard />} />
