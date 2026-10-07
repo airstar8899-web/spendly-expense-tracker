@@ -1,3 +1,4 @@
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import {
   ArrowRight,
@@ -7,52 +8,61 @@ import {
   CheckCircle2,
 } from "lucide-react";
 
+import Features from "../../components/welcome/Features";
+import Analytics from "../../components/welcome/Analytics";
+import Security from "../../components/welcome/Security";
+
 const Welcome = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-[#efece5] text-[#502D55] font-sans selection:bg-[#F6DBC0] selection:text-[#502D55]">
+    <div className="min-h-screen bg-[#efece5] text-[#502D55] font-sans selection:bg-[#F6DBC0] selection:text-[#502D55] scroll-smooth">
       {/* Navbar */}
-      <header className="max-w-7xl mx-auto px-6 py-6 flex items-center justify-between">
-        <div className="px-4 md:px-6 mb-8 flex items-center justify-center md:justify-start gap-2">
-          <div className="w-8 h-8 rounded-lg bg-[#502D55] flex items-center justify-center text-white text-sm font-bold">
-            S
+      <header className="sticky top-0 z-50 bg-[#efece5]/80 backdrop-blur-md border-b border-[#F6DBC0]/50">
+        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+          <div
+            className="flex items-center gap-2 cursor-pointer"
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          >
+            <div className="w-8 h-8 rounded-lg bg-[#502D55] flex items-center justify-center text-white text-sm font-bold">
+              S
+            </div>
+            <span className="hidden md:inline text-lg font-bold text-[#502D55]">
+              Spendly
+            </span>
           </div>
-          <span className="hidden md:inline text-lg font-bold text-[#502D55]">
-            Spendly
-          </span>
-        </div>
 
-        <nav className="hidden md:flex items-center gap-8 text-sm text-[#6B3F63] font-medium">
-          <a href="#features" className="hover:text-[#502D55] transition">
-            Features
-          </a>
-          <a href="#analytics" className="hover:text-[#502D55] transition">
-            Analytics
-          </a>
-          <a href="#security" className="hover:text-[#502D55] transition">
-            Security
-          </a>
-        </nav>
+          <nav className="hidden md:flex items-center gap-8 text-sm text-[#6B3F63] font-medium">
+            <a href="#features" className="hover:text-[#502D55] transition">
+              Features
+            </a>
+            <a href="#analytics" className="hover:text-[#502D55] transition">
+              Analytics
+            </a>
+            <a href="#security" className="hover:text-[#502D55] transition">
+              Security
+            </a>
+          </nav>
 
-        <div className="flex items-center gap-3">
-          <button
-            onClick={() => navigate("/signin")}
-            className="text-sm font-medium text-[#502D55] hover:text-[#6B3F63] px-4 py-2 transition"
-          >
-            Sign in
-          </button>
-          <button
-            onClick={() => navigate("/signup")}
-            className="text-sm font-semibold bg-[#502D55] text-[#F8F4E9] px-5 py-2.5 rounded-full hover:bg-[#6B3F63] transition shadow-sm"
-          >
-            Get Started
-          </button>
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => navigate("/signin")}
+              className="text-sm font-medium text-[#502D55] hover:text-[#6B3F63] px-4 py-2 transition cursor-pointer"
+            >
+              Sign in
+            </button>
+            <button
+              onClick={() => navigate("/signup")}
+              className="text-sm font-semibold bg-[#502D55] text-[#F8F4E9] px-5 py-2.5 rounded-full hover:bg-[#6B3F63] transition shadow-sm cursor-pointer"
+            >
+              Get Started
+            </button>
+          </div>
         </div>
       </header>
 
       {/* Hero Section */}
-      <section className="max-w-7xl mx-auto px-6 pt-12 pb-24 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      <section className="max-w-7xl mx-auto px-6 pt-16 pb-24 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
         {/* Left Column: Typography & CTAs */}
         <div className="lg:col-span-7 space-y-6">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-[#F6DBC0]/60 text-[#502D55] rounded-full text-xs font-bold tracking-wide border border-[#F6DBC0]">
@@ -73,14 +83,14 @@ const Welcome = () => {
           <div className="flex flex-wrap items-center gap-4 pt-2">
             <button
               onClick={() => navigate("/signup")}
-              className="flex items-center gap-2 bg-[#502D55] text-[#F8F4E9] px-7 py-4 rounded-full font-semibold hover:bg-[#6B3F63] transition shadow-lg group"
+              className="flex items-center gap-2 bg-[#502D55] text-[#F8F4E9] px-7 py-4 rounded-full font-semibold hover:bg-[#6B3F63] transition shadow-lg group cursor-pointer"
             >
               Create free account
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </button>
             <button
               onClick={() => navigate("/signin")}
-              className="flex items-center gap-2 bg-white border border-[#F6DBC0] text-[#502D55] px-7 py-4 rounded-full font-semibold hover:bg-[#F6DBC0]/20 transition shadow-sm"
+              className="flex items-center gap-2 bg-white border border-[#F6DBC0] text-[#502D55] px-7 py-4 rounded-full font-semibold hover:bg-[#F6DBC0]/20 transition shadow-sm cursor-pointer"
             >
               Sign into dashboard
             </button>
@@ -98,10 +108,9 @@ const Welcome = () => {
           </div>
         </div>
 
-        {/* Right Column: Sleek Expense Dashboard Mockup Card */}
+        {/* Right Column: Expense Dashboard Mockup Card */}
         <div className="lg:col-span-5 relative">
-          {/* Decorative Background Glow matching your color palette */}
-          <div className="absolute -inset-1.5 bg-linear-to-tr from-[#502D55] via-[#935073] to-[#F6DBC0] rounded-4xl blur-xl opacity-30"></div>
+          <div className="absolute -inset-1.5 bg-gradient-to-tr from-[#502D55] via-[#935073] to-[#F6DBC0] rounded-4xl blur-xl opacity-30"></div>
 
           <div className="bg-[#502D55] text-[#F8F4E9] p-7 rounded-3xl shadow-2xl border border-[#6B3F63] space-y-6 relative">
             {/* Top Balance Card Widget */}
@@ -118,7 +127,6 @@ const Welcome = () => {
                 </span>
                 <span className="text-xs text-[#F6DBC0]">/ #2,000 budget</span>
               </div>
-              {/* Progress bar */}
               <div className="w-full bg-[#502D55] h-2 rounded-full overflow-hidden mt-2">
                 <div className="bg-[#F6DBC0] h-full rounded-full w-[62%]" />
               </div>
@@ -181,6 +189,30 @@ const Welcome = () => {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Embedded Sub-Sections */}
+      <Features />
+      <Analytics />
+      <Security />
+
+      {/* Bottom CTA Banner */}
+      <section className="max-w-7xl mx-auto px-6 pb-24">
+        <div className="bg-[#502D55] text-[#F8F4E9] rounded-3xl p-10 md:p-14 flex flex-col md:flex-row items-center justify-between gap-8 border border-[#6B3F63]">
+          <div className="space-y-3 max-w-xl text-center md:text-left">
+            <h2 className="text-3xl font-bold">Ready to streamline your budget?</h2>
+            <p className="text-[#F6DBC0] text-sm">
+              Start tracking expenses in under two minutes with zero commitment required.
+            </p>
+          </div>
+          <button
+            onClick={() => navigate("/signup")}
+            className="flex items-center gap-2 bg-[#F6DBC0] text-[#502D55] px-7 py-4 rounded-full font-bold hover:bg-white transition shadow-lg shrink-0 cursor-pointer"
+          >
+            Get Started Free
+            <ArrowRight className="w-4 h-4" />
+          </button>
         </div>
       </section>
     </div>
